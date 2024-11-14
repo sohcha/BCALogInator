@@ -37,43 +37,38 @@ public class DB {
 		}
 	}
 
-	// /** Returns an array list of the leagues in the database. */
-	// public static ArrayList<League> loadLeagues() {
-	// 	ArrayList<League> list = new ArrayList<>();
-	// 	String queryString = " select league.league_id, league_name, count(team.league_id)  as teams_count " +
-	// 			" from league  " +
-	// 			" left join team on league.league_id = team.league_id " +
-	// 			" group by league.league_id, league_name " +
-	// 			" order by league_name ";
+	/** Returns an array list of the leagues in the database. */
+	public static ArrayList<Action> loadLeagues() {
+		ArrayList<Action> list = new ArrayList<>();
+		String queryString = " select action.action_id, student_id, action_type_id, action_dt_time " +
+				" from action  " +
+				" order by action_id ";
 
-	// 	try (
-	// 			PreparedStatement queryStmt = db.conn.prepareStatement(queryString);
-	// 			ResultSet rs = queryStmt.executeQuery();) {
+		try (
+				PreparedStatement queryStmt = db.conn.prepareStatement(queryString);
+				ResultSet rs = queryStmt.executeQuery();) {
 
-	// 		while (rs.next()) {
-	// 			int leagueId = rs.getInt("league_id");
-	// 			String leagueName = rs.getString("league_name");
+			while (rs.next()) {
+				int actionId = rs.getInt("action_id");
+				int studentID = rs.getInt("student_id");
+				String actionType = rs.getString("action_type_id");
+				String actionDateTime = rs.getString("action_dt_time");
 
-	// 			boolean hasTeams = false;
-	// 			if (rs.getInt("teams_count") > 0) {
-	// 				hasTeams = true;
-	// 			}
+				Action action = new Action(actionId, studentID, actionType, actionDateTime);
 
-	// 			League league = new League(leagueId, leagueName, hasTeams);
+				list.add(action);
+			}
 
-	// 			list.add(league);
-	// 		}
+		} catch (Exception ex) {
+			System.err.println(ex);
+			ex.printStackTrace(System.err);
+		}
 
-	// 	} catch (Exception ex) {
-	// 		System.err.println(ex);
-	// 		ex.printStackTrace(System.err);
-	// 	}
-
-	// 	return list;
-	// }
+		return list;
+	}
 
 
-	/** Loads a single league given an id. */
+	/** Loads a single student given an id. */
 	public static Student loadStudent(String studentId) {
 		String queryString = " select student.student_id, student_first_name, student_last_name " +
 				" from student  " +
@@ -101,19 +96,22 @@ public class DB {
 		return null;
 	}
 
-	// /** Adds a new league to the database. */
-	// public static void insertLeague(String leagueName) {
-	// 	String query = "insert into league(league_name) values (?)";
+	/** Records an action to the database. */
+	public static void recordAction(String studentId, String actionType) {
+		int i = 0;
+		String query = "insert into action(student_id, action_type_id, action_dt_time) values (?,?,NOW()) ";
+		try (PreparedStatement insertStmt = db.conn.prepareStatement(query)) {
+			insertStmt.setString(1, studentId);
+			insertStmt.setString(2, actionType); 
 
-	// 	try (PreparedStatement insertStmt = db.conn.prepareStatement(query)) {
-
-	// 		insertStmt.setString(1, leagueName);
-	// 		insertStmt.executeUpdate();
-	// 	} catch (Exception ex) {
-	// 		System.err.println(ex);
-	// 		ex.printStackTrace(System.err);
-	// 	}
-	// }
+			insertStmt.executeUpdate();
+		} catch (Exception ex) {
+			System.err.println(ex);
+			ex.printStackTrace(System.err);
+		}
+		
+		
+	}
 
 	// /** Updates the name of a league in the database. */
 	// public static void updateLeague(League league) {

@@ -30,6 +30,7 @@ public class MainPage {
         signInButton.setOnAction(e -> {
             Student s = DB.loadStudent(idScanInput.getText());
             if(s != null) {
+                DB.recordAction(idScanInput.getText(),"SIGNED_IN");
                 SignedIn signedIn = new SignedIn(window, s);
                 window.setScene(new Scene(signedIn.getLayout(), 300, 200));
             }
@@ -43,6 +44,7 @@ public class MainPage {
         signOutButton.setOnAction(e -> {
             Student s = DB.loadStudent(idScanInput.getText());
             if(s != null) {
+                DB.recordAction(idScanInput.getText(),"SIGNED_OUT");
                 SignedOut signedOut = new SignedOut(window, s);
                 window.setScene(new Scene(signedOut.getLayout(), 300, 200));
             }
