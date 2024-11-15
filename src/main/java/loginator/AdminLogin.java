@@ -23,8 +23,7 @@ public class AdminLogin {
         
         loginButton.setOnAction(e -> {
             if (validateAdmin(usernameInput.getText(), passwordInput.getText())) {
-                AdminDashboard adminDashboard = new AdminDashboard(window);
-                window.setScene(new Scene(adminDashboard.getLayout(), 600, 400));
+                AdminDashboard.showAdminDashboard(window);
             } else {
                 Label errorLabel = new Label("Sorry, the credentials are incorrect. Please try again.");
                 layout.getChildren().add(errorLabel);

@@ -38,10 +38,11 @@ public class DB {
 	}
 
 	/** Returns an array list of the leagues in the database. */
-	public static ArrayList<Action> loadLeagues() {
+	public static ArrayList<Action> loadActions() {
 		ArrayList<Action> list = new ArrayList<>();
-		String queryString = " select action.action_id, student_id, action_type_id, action_dt_time " +
+		String queryString = " select action.action_id, action.student_id, action_type_id, action_dt_time, student_first_name, student_last_name " +
 				" from action  " +
+				" join student on action.student_id = student.student_id" +
 				" order by action_id ";
 
 		try (
@@ -53,8 +54,11 @@ public class DB {
 				int studentID = rs.getInt("student_id");
 				String actionType = rs.getString("action_type_id");
 				String actionDateTime = rs.getString("action_dt_time");
+				String studentFirst = rs.getString("student_first_name");
+				String studentLast = rs.getString("student_last_name");
+				String studentName = studentFirst + " " + studentLast;
 
-				Action action = new Action(actionId, studentID, actionType, actionDateTime);
+				Action action = new Action(actionId, studentID, actionType, actionDateTime, studentName);
 
 				list.add(action);
 			}

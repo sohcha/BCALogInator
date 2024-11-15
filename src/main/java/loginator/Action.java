@@ -5,6 +5,7 @@ public class Action {
     private int studentId;
     private String actionTypeId;
     private String actDateTime;
+    private String studentName;
     
     public int getActionId() {
         return actionId;
@@ -30,11 +31,18 @@ public class Action {
     public void setActDateTime(String actDateTime) {
         this.actDateTime = actDateTime;
     }
-    public Action(int actionId, int studentId, String actionTypeId, String actDateTime) {
+    public Action(int actionId, int studentId, String actionTypeId, String actDateTime, String studentName) {
         this.actionId = actionId;
         this.studentId = studentId;
         this.actionTypeId = actionTypeId;
         this.actDateTime = actDateTime;
+        this.studentName = studentName;
+    }
+    public String getStudentName() {
+        return studentName;
+    }
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     
