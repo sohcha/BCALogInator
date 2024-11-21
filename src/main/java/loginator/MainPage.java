@@ -53,10 +53,7 @@ public class MainPage {
                 layout.getChildren().add(errorLabel);
             }
             
-        });
-
-        // Add more logic for handling the scanning of student ID (SID)
-        
+        });        
         layout.getChildren().addAll(titleLabel, welcomeLabel, idScanLabel, idScanInput, signInButton, signOutButton, adminLoginButton);
     }
     

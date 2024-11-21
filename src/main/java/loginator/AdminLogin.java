@@ -1,5 +1,6 @@
 package loginator;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -29,8 +30,14 @@ public class AdminLogin {
                 layout.getChildren().add(errorLabel);
             }
         });
+
+        Button exitButton = new Button("Cancel");
+        exitButton.setOnAction(e -> {
+            MainPage mainPage = new MainPage(window);
+            window.setScene(new Scene(mainPage.getLayout(), 400, 400));
+        });
         
-        layout.getChildren().addAll(usernameLabel, usernameInput, passwordLabel, passwordInput, loginButton);
+        layout.getChildren().addAll(usernameLabel, usernameInput, passwordLabel, passwordInput, loginButton, exitButton);
     }
     
     public VBox getLayout() {
