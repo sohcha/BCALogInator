@@ -24,7 +24,7 @@ public class MainPage {
         Button signOutButton = new Button("Sign Out");
         adminLoginButton.setOnAction(e -> {
             AdminLogin adminLogin = new AdminLogin(window);
-            window.setScene(new Scene(adminLogin.getLayout(), 300, 200));
+            window.setScene(new Scene(adminLogin.getLayout(), 300, 400));
         });
 
         signInButton.setOnAction(e -> {
@@ -63,9 +63,4 @@ public class MainPage {
     public VBox getLayout() {
         return layout;
     }
-
-    private boolean validateStudent(String studentId){
-        if(DB.loadStudent(studentId) == null) return false;
-        return true;
-}
 }

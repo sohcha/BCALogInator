@@ -43,7 +43,7 @@ public class DB {
 		String queryString = " select action.action_id, action.student_id, action_type_id, action_dt_time, student_first_name, student_last_name " +
 				" from action  " +
 				" join student on action.student_id = student.student_id" +
-				" order by action_id ";
+				" order by action_dt_time DESC ";
 
 		try (
 				PreparedStatement queryStmt = db.conn.prepareStatement(queryString);
@@ -51,7 +51,7 @@ public class DB {
 
 			while (rs.next()) {
 				int actionId = rs.getInt("action_id");
-				int studentID = rs.getInt("student_id");
+				String studentID = rs.getString("student_id");
 				String actionType = rs.getString("action_type_id");
 				String actionDateTime = rs.getString("action_dt_time");
 				String studentFirst = rs.getString("student_first_name");
@@ -116,6 +116,36 @@ public class DB {
 		
 		
 	}
+
+	public static ArrayList<String[]> loadSignedInStudentsToday() {
+		ArrayList<String[]> list = new ArrayList<>();
+		String queryString = "SELECT s.student_id, s.student_first_name, s.student_last_name, MIN(a.action_dt_time) AS earliest_sign_in " + // Check if we want earliest or latest
+							 "FROM action a " +
+							 "JOIN student s ON a.student_id = s.student_id " +
+							 "WHERE a.action_type_id = 'SIGNED_IN' AND DATE(a.action_dt_time) = CURDATE() " +
+							 "GROUP BY s.student_id, s.student_first_name, s.student_last_name";
+	
+		try (PreparedStatement queryStmt = db.conn.prepareStatement(queryString);
+			 ResultSet rs = queryStmt.executeQuery()) {
+	
+			while (rs.next()) {
+				String studentID = rs.getString("student_id");
+				String firstName = rs.getString("student_first_name");
+				String lastName = rs.getString("student_last_name");
+				String signInDateTime = rs.getString("earliest_sign_in");
+	
+				list.add(new String[] { studentID, firstName + " " + lastName, signInDateTime });
+			}
+		} catch (Exception ex) {
+			System.err.println(ex);
+			ex.printStackTrace(System.err);
+		}
+	
+		return list;
+	}
+	
+	
+	
 
 	// /** Updates the name of a league in the database. */
 	// public static void updateLeague(League league) {

@@ -2,7 +2,7 @@ package loginator;
 
 public class Action {
     private int actionId;
-    private int studentId;
+    private String studentId;
     private String actionTypeId;
     private String actDateTime;
     private String studentName;
@@ -13,10 +13,10 @@ public class Action {
     public void setActionId(int actionId) {
         this.actionId = actionId;
     }
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
     public String getActionTypeId() {
@@ -31,7 +31,7 @@ public class Action {
     public void setActDateTime(String actDateTime) {
         this.actDateTime = actDateTime;
     }
-    public Action(int actionId, int studentId, String actionTypeId, String actDateTime, String studentName) {
+    public Action(int actionId, String studentId, String actionTypeId, String actDateTime, String studentName) {
         this.actionId = actionId;
         this.studentId = studentId;
         this.actionTypeId = actionTypeId;

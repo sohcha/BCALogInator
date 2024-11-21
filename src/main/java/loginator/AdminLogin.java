@@ -38,7 +38,6 @@ public class AdminLogin {
     }
 
     private boolean validateAdmin(String username, String password) {
-        // Placeholder validation, replace with actual logic
         return username.equals("admin") && password.equals("password");
     }
 }
