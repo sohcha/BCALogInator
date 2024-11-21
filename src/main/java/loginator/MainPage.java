@@ -57,7 +57,7 @@ public class MainPage {
 
         // Add more logic for handling the scanning of student ID (SID)
         
-        layout.getChildren().addAll(titleLabel, welcomeLabel, adminLoginButton, idScanLabel, idScanInput, signInButton, signOutButton);
+        layout.getChildren().addAll(titleLabel, welcomeLabel, idScanLabel, idScanInput, signInButton, signOutButton, adminLoginButton);
     }
     
     public VBox getLayout() {

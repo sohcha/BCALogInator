@@ -1,8 +1,8 @@
 package loginator;
-import loginator.Action;
-import loginator.DB;
-import loginator.Student;
-import javafx.geometry.Insets;
+// import loginator.Action;
+// import loginator.DB;
+// import loginator.Student;
+// import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.sql.DriverManager;
+// import java.sql.DriverManager;
 import java.util.ArrayList;
 
 

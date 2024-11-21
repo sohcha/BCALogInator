@@ -2,9 +2,9 @@ package loginator;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+// import javafx.scene.layout.VBox;
+// import javafx.scene.control.Button;
+// import javafx.scene.control.Label;
 
 public class Main extends Application {
     private Stage window;
