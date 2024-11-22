@@ -102,7 +102,7 @@ public class DB {
 
 	/** Records an action to the database. */
 	public static void recordAction(String studentId, String actionType) {
-		String query = "insert into action(student_id, action_type_id, action_dt_time) values (?,?,NOW()) ";
+		String query = "insert into action(student_id, action_type_id, action_dt_time) values (?,?,CONVERT_TZ(NOW(),'SYSTEM','America/Montreal')) ";
 		try (PreparedStatement insertStmt = db.conn.prepareStatement(query)) {
 			insertStmt.setString(1, studentId);
 			insertStmt.setString(2, actionType); 

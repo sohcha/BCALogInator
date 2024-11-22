@@ -41,7 +41,7 @@ public class SignedInTodayPage {
         studentListGrid.add(headerName, 1, 0);
         studentListGrid.add(headerDateTime, 2, 0);
 
-        // Populate the grid with student data
+        // put student data in grid
         for (int i = 0; i < students.size(); i++) {
             String[] studentData = students.get(i);
 
