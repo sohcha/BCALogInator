@@ -19,7 +19,7 @@ public class Main extends Application {
         window.setTitle("BCALogInator 2.0");
 
         MainPage mainPage = new MainPage(window);
-        window.setScene(new Scene(mainPage.getLayout(), 400, 400));
+        window.setScene(new Scene(mainPage.getLayout(), 600, 600));
         window.show();
     }
 }

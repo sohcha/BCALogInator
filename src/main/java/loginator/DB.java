@@ -17,7 +17,6 @@ public class DB {
 		try (InputStream input = new FileInputStream("config.properties")) {
 			Properties prop = new Properties();
 
-			// load a properties file
 			prop.load(input);
 
 			Properties connectionProps = new Properties();
@@ -37,7 +36,6 @@ public class DB {
 		}
 	}
 
-	/** Returns an array list of the leagues in the database. */
 	public static ArrayList<Action> loadActions() {
 		ArrayList<Action> list = new ArrayList<>();
 		String queryString = " select action.action_id, action.student_id, action_type_id, action_dt_time, student_first_name, student_last_name " +
@@ -72,7 +70,6 @@ public class DB {
 	}
 
 
-	/** Loads a single student given an id. */
 	public static Student loadStudent(String studentId) {
 		String queryString = " select student.student_id, student_first_name, student_last_name " +
 				" from student  " +
@@ -100,7 +97,6 @@ public class DB {
 		return null;
 	}
 
-	/** Records an action to the database. */
 	public static void recordAction(String studentId, String actionType) {
 		String query = "insert into action(student_id, action_type_id, action_dt_time) values (?,?,CONVERT_TZ(NOW(),'SYSTEM','America/Montreal')) ";
 		try (PreparedStatement insertStmt = db.conn.prepareStatement(query)) {
@@ -142,38 +138,15 @@ public class DB {
 	
 		return list;
 	}
-	
-	
-	
 
-	// /** Updates the name of a league in the database. */
-	// public static void updateLeague(League league) {
-	// 	String query = "update league set league_name = ? where league_id = ?";
-
-	// 	try (PreparedStatement updateStmt = db.conn.prepareStatement(query)) {
-
-	// 		updateStmt.setString(1, league.getLeagueName());
-	// 		updateStmt.setInt(2, league.getLeagueId());
-
-	// 		updateStmt.executeUpdate();
-	// 	} catch (Exception ex) {
-	// 		System.err.println(ex);
-	// 		ex.printStackTrace(System.err);
-	// 	}
-	// }
-
-	// /** Deletes the given league from the database. */
-	// public static void deleteLeague(int leagueId) {
-	// 	String query = "delete from league where league_id = ?";
-
-	// 	try (PreparedStatement updateStmt = db.conn.prepareStatement(query)) {
-
-	// 		updateStmt.setInt(1, leagueId);
-	// 		updateStmt.executeUpdate();
-	// 	} catch (Exception ex) {
-	// 		System.err.println(ex);
-	// 		ex.printStackTrace(System.err);
-	// 	}
-	// }
-
+	public static void clearAllActions() {
+		String query = "DELETE FROM action";
+		try (PreparedStatement stmt = db.conn.prepareStatement(query)) {
+			stmt.executeUpdate();
+			System.out.println("All actions cleared from the database.");
+		} catch (Exception ex) {
+			System.err.println(ex);
+			ex.printStackTrace(System.err);
+		}
+	}
 }
