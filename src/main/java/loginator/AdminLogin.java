@@ -38,9 +38,9 @@ public class AdminLogin {
 
         // Login and cancel buttons
         Button loginButton = new Button("Login");
-        loginButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        loginButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         Button cancelButton = new Button("Cancel");
-        cancelButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #f44336; -fx-text-fill: white;");
+        cancelButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
 
         // Button actions
         loginButton.setOnAction(e -> {

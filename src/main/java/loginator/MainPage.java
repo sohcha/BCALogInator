@@ -36,9 +36,9 @@ public class MainPage {
 
         // Sign-in and Sign-out buttons
         Button signInButton = new Button("Sign In");
-        signInButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        signInButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         Button signOutButton = new Button("Sign Out");
-        signOutButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #f44336; -fx-text-fill: white;");
+        signOutButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
 
         // HBox for sign-in and sign-out buttons
         HBox signInOutBox = new HBox(20);
@@ -73,6 +73,7 @@ public class MainPage {
             } else {
                 showTemporaryNotification("Error", "Invalid ID. Please try again.", 10);
             }
+            idScanInput.clear();
         });
 
         signOutButton.setOnAction(e -> {
@@ -83,6 +84,7 @@ public class MainPage {
             } else {
                 showTemporaryNotification("Error", "Invalid ID. Please try again.", 10);
             }
+            idScanInput.clear();
         });
 
         // Adding all elements to the layout

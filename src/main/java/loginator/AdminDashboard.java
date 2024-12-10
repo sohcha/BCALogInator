@@ -34,14 +34,14 @@ public class AdminDashboard {
         searchInput.setPromptText("Enter Student Name or ID");
         searchInput.setStyle("-fx-pref-width: 300;");
         Button searchButton = new Button("Search");
-        searchButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        searchButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         VBox search = new VBox(10);
         search.getChildren().addAll(searchInput, searchButton);
         search.setAlignment(Pos.CENTER);
 
         // Button for today's signed-in students
         Button viewSignedInTodayButton = new Button("View Today's Signed-In Students");
-        viewSignedInTodayButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #007bb5; -fx-text-fill: white;");
+        viewSignedInTodayButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
 
 
 
@@ -70,11 +70,11 @@ public class AdminDashboard {
 
         // Export and Back buttons
         Button exportButton = new Button("Export to Excel");
-        exportButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        exportButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         exportButton.setOnAction(e -> exportGridPaneToExcel(DB.loadActions()));
 
         Button backButton = new Button("Back to Main Page");
-        backButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #f44336; -fx-text-fill: white;");
+        backButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         backButton.setOnAction(e -> {
             MainPage mainPage = new MainPage(window);
             window.setScene(new Scene(mainPage.getLayout(), 600, 600));
@@ -82,7 +82,7 @@ public class AdminDashboard {
 
         // Clear History button
         Button clearHistoryButton = new Button("Clear History");
-        clearHistoryButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #FF5722; -fx-text-fill: white;");
+        clearHistoryButton.setStyle("-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #4169e1; -fx-text-fill: white;");
         clearHistoryButton.setOnAction(e -> {
             DB.clearAllActions();
             loadGridPane(gp, new ArrayList<>(), ""); // Clear the grid
@@ -131,7 +131,7 @@ public class AdminDashboard {
         for (Action action : actions) {
             if (mode == 0 || 
                 (mode == 1 && action.getStudentId().contains(input)) || 
-                (mode == 2 && action.getStudentName().contains(input))) {
+                (mode == 2 && action.getStudentName().toLowerCase().contains(input.toLowerCase()))) {
                 gp.add(new Label(String.valueOf(action.getActionId())), 0, j + 1);
                 gp.add(new Label(action.getStudentId()), 1, j + 1);
                 gp.add(new Label(action.getStudentName()), 2, j + 1);
@@ -171,6 +171,7 @@ public class AdminDashboard {
 
         try (FileOutputStream fileOut = new FileOutputStream("AdminDashboardData.xlsx")) {
             workbook.write(fileOut);
+            workbook.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
